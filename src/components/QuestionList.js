@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Question from "./Question";
 import { Tabs, Card } from "antd";
 
 class QuestionList extends Component {
   render() {
     const { TabPane } = Tabs;
+    const { users, authedUser } = this.props;
+
+    console.log(users);
 
     function callback(key) {
       console.log(key);
@@ -14,12 +18,18 @@ class QuestionList extends Component {
         <Card style={{ width: 500 }}>
           <Tabs defaultActiveKey="1" onChange={callback}>
             <TabPane tab="Unanswered Questions" key="1">
-              Content of Tab Pane 1
+              {this.props.unansweredQuestions.map(answer => (
+                <li key={answer}>
+                  <Question answerId={answer} avatar={users[authedUser]} />
+                </li>
+              ))}
             </TabPane>
             <TabPane tab="Answered Questions" key="2">
               <ul>
                 {this.props.answeredQuestions.map(answer => (
-                  <li key={answer}>{answer}</li>
+                  <li key={answer}>
+                    <Question answerId={answer} avatar={users[authedUser]} />
+                  </li>
                 ))}
               </ul>
             </TabPane>
@@ -31,11 +41,23 @@ class QuestionList extends Component {
 }
 
 function mapStateToProps({ authedUser, users, questions }) {
-
   const answeredQuestions =
     users && users[authedUser] && Object.keys(users[authedUser].answers);
+
+  const unansweredQuestions =
+    questions &&
+    answeredQuestions &&
+    Object.keys(questions).filter(function(question) {
+      return !answeredQuestions.some(function(answered) {
+        return question === answered;
+      });
+    });
+
   return {
-    answeredQuestions: answeredQuestions || []
+    answeredQuestions: answeredQuestions || [],
+    unansweredQuestions: unansweredQuestions || [],
+    authedUser,
+    users
   };
 }
 
