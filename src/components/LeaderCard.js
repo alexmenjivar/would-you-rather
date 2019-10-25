@@ -1,34 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Avatar, Button, Col, Row } from "antd";
+import { Card, Avatar } from "antd";
 
 class LeaderBoard extends Component {
   render() {
-    const { authedUser, users } = this.props;
+    const { users, questions, user } = this.props;
+
+    const answeredQuestions =
+      users && users[user] && Object.keys(users[user].answers);
+
+    const unansweredQuestions =
+      questions &&
+      answeredQuestions &&
+      Object.keys(questions).filter(function(question) {
+        return !answeredQuestions.some(function(answered) {
+          return question === answered;
+        });
+      });
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Card title={`${users[authedUser].name} asks:`} bordered={true} style={{ width: 500 }} type="inner">
-          <div style={{ display: 'flex' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Avatar src={users[authedUser].avatarURL} size={128} />
+        <Card bordered={true} style={{ width: 500 }}>
+          <div style={{ display: "flex" }}>
+            <div
+              style={{ display: "flex", alignItems: "center", width: "25%" }}
+            >
+              <Avatar src={users[user].avatarURL} size={128} />
             </div>
-            <div style={{ marginLeft: 20 }}>
-              <div>NAME</div>
-              <div style={{ fontWeight: 'bold' }}>Would you rather</div>
+            <div style={{ marginLeft: 20, width: "50%" }}>
+              <h3>{users[user].name}</h3>
               <br />
-              <Row>
-                <Col span={12}>Answered Questions</Col>
-                <Col span={12}>10</Col>
-              </Row>
-              <Row>
-                <Col span={12}>Unanswered Questions</Col>
-                <Col span={12}>5</Col>
-              </Row>
-              <Button block>View Poll</Button>
+              <div style={{ display: "flex" }}>
+                <div style={{ width: "85%" }}>Answered Questions</div>
+                <div>{answeredQuestions.length}</div>
+              </div>
+              <div style={{ display: "flex" }}>
+                <div style={{ width: "85%" }}>Unanswered Questions</div>
+                <div>{unansweredQuestions.length}</div>
+              </div>
             </div>
             <div>
-              <Card title="Score" bordered={true} style={{ width: '100%' }} type="inner">
-                10
+              <Card title="Score" bordered={true} type="inner">
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  {answeredQuestions.length + unansweredQuestions.length}
+                </div>
               </Card>
             </div>
           </div>

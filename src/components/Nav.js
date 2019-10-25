@@ -1,22 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { Menu } from "antd";
 
-class Nav extends Component{
-  render(){
+class Nav extends Component {
+  render() {
     return (
       <div>
-      <Menu mode="horizontal">
-        <Menu.Item>Home</Menu.Item>
-        <Menu.Item>New Question</Menu.Item>
-        <Menu.Item>LeaderBoard</Menu.Item>
-      </Menu>
+        <Menu mode="horizontal" style={{ display: "flex"}}>
+          <Menu.Item>
+            <NavLink to="/" exact>
+              Home
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="/new" exact>
+              New Question
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="/leaderboard" exact>
+              LeaderBoard
+            </NavLink>
+          </Menu.Item>
+        </Menu>
       </div>
     );
-  } 
+  }
 }
 
-function mapStateToProps({ authedUser}) {
+function mapStateToProps({ authedUser }) {
   return {
     authedUser
   };
