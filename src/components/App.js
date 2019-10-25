@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from 'react-redux'
 import { handleInitialData } from "../actions/shared";
 import Nav from "./Nav";
-import QuestionList from "./QuestionList";
+//import QuestionList from "./QuestionList";
 //import Results from './Results'
 //import Question from './Question'
 //import NewQuestion from "./NewQuestion";
 //import Login from './Login'
-//import LeaderCard from './LeaderCard'
+import LeaderCard from './LeaderCard'
 //import NotFound from './NotFound'
 //import Answer from './Answer'
 import '../App.css';
@@ -26,7 +26,7 @@ class App extends Component {
         <Nav />
         {this.props.loading === true
         ? null
-        : <QuestionList />
+        : <LeaderCard />
         }
       </div>
     );

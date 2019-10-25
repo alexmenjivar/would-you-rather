@@ -5,12 +5,12 @@ import { Card, Avatar, Button } from "antd";
 
 class Question extends Component {
   render() {
-    const { answerId, avatar, questions, authedUser, users } = this.props;
+    const { answerId, author, questions, users } = this.props;
     return (
-      <Card title={`${users[authedUser].name} asks:`} bordered={true} style={{ width: '100%' }} type="inner">
+      <Card title={`${users[author].name} asks:`} bordered={true} style={{ width: '100%' }} type="inner">
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex', alignItems:'center' }}>
-            <Avatar src={avatar.avatarURL} size={128}/>
+            <Avatar src={users[author].avatarURL} size={128}/>
           </div>
           <div style={{ marginLeft: 20 }}>
             <div style={{ fontWeight: 'bold' }}>Would you rather</div>

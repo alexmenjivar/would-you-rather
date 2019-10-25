@@ -6,7 +6,7 @@ import { Tabs, Card } from "antd";
 class QuestionList extends Component {
   render() {
     const { TabPane } = Tabs;
-    const { users, authedUser } = this.props;
+    const { users, questions } = this.props;
 
     console.log(users);
 
@@ -20,7 +20,7 @@ class QuestionList extends Component {
             <TabPane tab="Unanswered Questions" key="1">
               {this.props.unansweredQuestions.map(answer => (
                 <li key={answer}>
-                  <Question answerId={answer} avatar={users[authedUser]} />
+                  <Question answerId={answer} author={questions[answer].author} />
                 </li>
               ))}
             </TabPane>
@@ -28,7 +28,7 @@ class QuestionList extends Component {
               <ul>
                 {this.props.answeredQuestions.map(answer => (
                   <li key={answer}>
-                    <Question answerId={answer} avatar={users[authedUser]} />
+                    <Question answerId={answer} author={questions[answer].author} />
                   </li>
                 ))}
               </ul>
@@ -57,7 +57,8 @@ function mapStateToProps({ authedUser, users, questions }) {
     answeredQuestions: answeredQuestions || [],
     unansweredQuestions: unansweredQuestions || [],
     authedUser,
-    users
+    users, 
+    questions
   };
 }
 
