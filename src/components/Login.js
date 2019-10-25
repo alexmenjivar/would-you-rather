@@ -1,27 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Card, Select, Button, Form } from 'antd'
+
+const { Option } = Select;
+
+function handleChange(value) {
+  console.log(`selected ${value}`);
+}
 
 class Login extends Component {
+
   render() {
-    console.log(this.props);
     return (
-      <div>
-        <div id="login-form-wrap">
-          <h2>Welcome to the Would You Rather App</h2>
-          <form id="login-form">
-            <p>
-              <select className="login-select">
-                {this.props.usersIds.map(user => (
-                  <option key={user}>{user}</option>
-                ))}
-              </select>
-            </p>
-            <p>
-              <input type="submit" id="login-button" value="Login"></input>
-            </p>
-          </form>
-        </div>
-      </div>
+      <Form style={{ display: "flex", justifyContent: "center" }}>
+        <Card title="Would you rather App">
+          <Form.Item>
+            <Select defaultValue="sarahedo" style={{ width: '100%'}} onChange={handleChange}>
+              {this.props.usersIds.map(user => (
+                <Option key={user}>{user}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" block>
+              Log in
+          </Button>
+          </Form.Item>
+        </Card>
+      </Form>
     );
   }
 }
