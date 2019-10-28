@@ -18,7 +18,7 @@ class Login extends Component {
     });
   };
 
-  handleSubmit = e =>{
+  handleSubmit = e => {
     e.preventDefault();
     const { user } = this.state;
     const { dispatch } = this.props;
@@ -27,15 +27,14 @@ class Login extends Component {
 
     this.setState({
       toHome: true
-    })
-  }
+    });
+  };
 
   render() {
+    const { toHome } = this.state;
 
-    const {toHome} = this.state
-
-    if(toHome === true){
-      return <Redirect to='/' />
+    if (toHome === true) {
+      return <Redirect to="/" />;
     }
     return (
       <Form

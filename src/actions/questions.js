@@ -1,4 +1,6 @@
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
+export const CREATE_QUESTION = 'CREATE_QUESTION'
+
 
 export function receiveQuestions(questions){
     return {
@@ -6,3 +8,10 @@ export function receiveQuestions(questions){
         questions
     }
 }
+
+export function createQuestion(question) {
+    return {
+      type: CREATE_QUESTION,
+      question
+    };
+  }
