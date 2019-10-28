@@ -1,19 +1,18 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { handleInitialData } from "../actions/shared";
 import Nav from "./Nav";
 import QuestionList from "./QuestionList";
-//import Results from './Results'
-//import Question from './Question'
+import Results from './Results'
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 import Login from './Login'
-//import LeaderCard from "./LeaderCard";
-//import NotFound from './NotFound'
-//import Answer from './Answer'
+import NotFound from './NotFound'
+import Answer from './Answer'
 import "../App.css";
 import LoadingBar from "react-redux-loading";
+import QuestionContainer from "./QuestionContainer";
 
 class App extends Component {
   componentDidMount() {
@@ -27,12 +26,14 @@ class App extends Component {
           <LoadingBar />
           <Nav />
           {this.props.loading === true ? null : (
-            <div>
+            <Switch>
               <Route path='/login' component={Login} />
               <Route path='/' exact component={QuestionList} />
               <Route path='/new' component={NewQuestion} />
               <Route path='/leaderboard' component={LeaderBoard} />
-            </div>
+              <Route path='/questions/:question_id' component={QuestionContainer} />
+              <Route path='*' component={NotFound} />
+            </Switch>
           )}
         </Fragment>
       </Router>
@@ -40,9 +41,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps(state) {
   return {
-    loading: Object.keys(users).length === 0
+    loading: Object.keys(state.users).length === 0 || Object.keys(state.questions).length === 0
   };
 }
 

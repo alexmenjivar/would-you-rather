@@ -4,8 +4,8 @@ import { receiveQuestions, createQuestion } from "../actions/questions";
 import { setAuthedUser } from "../actions/authedUser";
 import { showLoading, hideLoading } from "react-redux-loading";
 
-//const AUTHED_ID = 'johndoe'
-const AUTHED_ID = null;
+const AUTHED_ID = 'johndoe'
+//const AUTHED_ID = null;
 
 export function handleInitialData() {
   return dispatch => {
@@ -24,8 +24,8 @@ export function handleCreateQuestion(optionOne, optionTwo) {
     const { authedUser } = getState();
     dispatch(showLoading());
     return saveQuestion({
-      optionOne: optionOne,
-      optionTwo: optionTwo,
+      optionOneText: optionOne,
+      optionTwoText: optionTwo,
       author: authedUser
     })
       .then(question => {

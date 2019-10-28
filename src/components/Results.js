@@ -7,8 +7,8 @@ class Results extends Component {
     const {authedUser, questions, users} = this.props
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
-        <Card title={`Asked by ${users[authedUser].name}`}style={{ width: 500 }}>
-        <Avatar src={users[authedUser].avatarURL} />
+        <Card title={`Asked by {users[authedUser].name}`} style={{ width: 500 }}>
+        <Avatar src={'users[authedUser].avatarURL'} />
         <Divider type="vertical" />
         <h3>Results:</h3>
         <span>Would you rather</span>
