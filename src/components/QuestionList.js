@@ -41,13 +41,11 @@ class QuestionList extends Component {
 }
 
 function mapStateToProps({ authedUser, users, questions }) {
-  const answeredQuestions =
-    users && users[authedUser] && Object.keys(users[authedUser].answers);
+  const answeredQuestions = Object.keys(users[authedUser].answers).sort(
+    (a, b) => questions[b].timestamp - questions[a].timestamp);
 
   const unansweredQuestions =
-    questions &&
-    answeredQuestions &&
-    Object.keys(questions).filter(function(question) {
+    Object.keys(questions).sort((a, b) => questions[b].timestamp - questions[a].timestamp).filter(function(question) {
       return !answeredQuestions.some(function(answered) {
         return question === answered;
       });

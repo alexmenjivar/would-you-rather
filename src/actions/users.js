@@ -1,5 +1,6 @@
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const INCLUDE_QUESTION_TO_USER = 'INCLUDE_QUESTION_TO_USER'
+export const INCLUDE_ANSWER_TO_USER = 'INCLUDE_ANSWER_TO_USER'
 
 export function receiveUsers(users) {
   return {
@@ -14,4 +15,13 @@ export function includeQuestionToUser({authedUser, questionId}){
         authedUser,
         questionId
     }
+}
+
+export function includeAnswerToUser({authedUser, qid, answer}){
+  return {
+    type: INCLUDE_ANSWER_TO_USER,
+    authedUser,
+    qid,
+    answer
+  }
 }

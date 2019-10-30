@@ -5,13 +5,22 @@ import LeaderCard from './LeaderCard'
 class LeaderBoard extends Component {
   render() {
 
-    const {userList} = this.props
+    const { users } = this.props;
+    const usersSorted = Object.values(users)
+      .map(user => ({
+        name: user.name,
+        avatar: user.avatarURL,
+        questionsAsked: user.questions.length,
+        questionsAnswered: Object.keys(user.answers).length,
+        score: user.questions.length + Object.keys(user.answers).length
+      }))
+      .sort((a, b) => b.score - a.score);
 
     return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <ul>
-      {userList.map((user) => 
-        <li key={user}>
+      {usersSorted.map((user, index) => 
+        <li key={index}>
           <LeaderCard user={user}/>
         </li>
       )}
@@ -21,14 +30,10 @@ class LeaderBoard extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, questions, users }) {
+function mapStateToProps({ users }) {
 
-  const userList = Object.keys(users)
   return {
-    authedUser,
-    questions,
-    users,
-    userList
+    users
   };
 }
 

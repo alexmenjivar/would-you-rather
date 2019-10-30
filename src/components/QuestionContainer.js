@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 
 class QuestionContainer extends Component {
   render() {
-    const { questions, users, authedUser, match } = this.props;
+    const { questions, authedUser, match } = this.props;
     const questionId = match.params.question_id;
 
     if (questions[questionId] === undefined) {
@@ -17,7 +17,7 @@ class QuestionContainer extends Component {
       questions[questionId].optionOne.votes.includes(authedUser) ||
       questions[questionId].optionTwo.votes.includes(authedUser);
 
-    return <div>{theUserAlreadyAnswered ? <Answer /> : <Results />}</div>;
+    return <div>{theUserAlreadyAnswered ? <Results questionId={questionId}/>: <Answer questionId={questionId}/>}</div>;
   }
 }
 
