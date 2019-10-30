@@ -32,9 +32,17 @@ class Login extends Component {
 
   render() {
     const { toHome } = this.state;
+    const { history } = this.props;
 
     if (toHome === true) {
-      return <Redirect to="/" />;
+      return (
+        <Redirect
+          to={
+            (history.location.state && history.location.state.from.pathname) ||
+            "/"
+          }
+        />
+      );
     }
     return (
       <Form
