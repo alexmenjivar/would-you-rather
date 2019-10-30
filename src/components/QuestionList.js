@@ -6,9 +6,7 @@ import { Tabs, Card } from "antd";
 class QuestionList extends Component {
   render() {
     const { TabPane } = Tabs;
-    const { users, questions } = this.props;
-
-    console.log(users);
+    const { questions } = this.props;
 
     function callback(key) {
       console.log(key);

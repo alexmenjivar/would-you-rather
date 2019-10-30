@@ -11,3 +11,9 @@ In this app, users will be able to answer questions, see which questions they ha
 * Move to rhe directory `cd would-you-rather`
 * Install all project dependencies with `npm install`
 * Start the development server with `npm start`
+
+## Important
+
+The project uses 2 third-party libraries that use deprecated lifecycle method (componentWillReceiveProps) and generate some warnings when the app runs. To fix this, is require to change the key and function `componentWillReceiveProps` to `UNSAFE_componentWillReceiveProps` in the following files:
+* project-dir/node_modules/react-redux-loading/build/loading_bar.js
+* project-dir/node_modules/rc-animate/Animate.js
